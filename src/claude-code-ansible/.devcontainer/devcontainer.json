@@ -73,7 +73,8 @@
   "remoteUser": "root",
   "mounts": [
     "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
-    "source=claude-code-config-${devcontainerId},target=/root/.claude,type=volume"
+    "source=claude-code-config-${devcontainerId},target=/root/.claude,type=volume",
+    "source=${localEnv:HOME}/.config/gcloud,target=/root/.config/gcloud,type=bind,readonly"
   ],
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",

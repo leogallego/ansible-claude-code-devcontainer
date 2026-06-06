@@ -1,6 +1,6 @@
 {
   "id": "claude-code",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Claude Code (Node.js)",
   "description": "Node.js development environment with Claude Code CLI, proxy sandbox, zsh, and git-delta",
   "documentationURL": "https://github.com/leogallego/claude-code-devcontainer/tree/main/src/claude-code",

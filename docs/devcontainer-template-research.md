@@ -111,7 +111,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Templates are published to: `ghcr.io/leogallego/claude-code-devcontainer/<template-id>:<version>`
+Templates are published to: `ghcr.io/leogallego/ansible-claude-code-devcontainer/<template-id>:<version>`
 
 **Important:** After first publish, manually set GHCR packages to **public** in GitHub package settings.
 
@@ -122,9 +122,9 @@ Submit a PR to [devcontainers/devcontainers.github.io](https://github.com/devcon
 ```yaml
 - name: Claude Code Dev Containers
   maintainer: Leonardo Gallego
-  contact: https://github.com/leogallego/claude-code-devcontainer/issues
-  repository: https://github.com/leogallego/claude-code-devcontainer
-  ociReference: ghcr.io/leogallego/claude-code-devcontainer
+  contact: https://github.com/leogallego/ansible-claude-code-devcontainer/issues
+  repository: https://github.com/leogallego/ansible-claude-code-devcontainer
+  ociReference: ghcr.io/leogallego/ansible-claude-code-devcontainer
 ```
 
 Once merged, VS Code and GitHub Codespaces will list the templates.
@@ -133,7 +133,7 @@ Once merged, VS Code and GitHub Codespaces will list the templates.
 
 Can also publish via CLI without the GitHub Action:
 ```bash
-devcontainer templates publish -r ghcr.io -n leogallego/claude-code-devcontainer ./src
+devcontainer templates publish -r ghcr.io -n leogallego/ansible-claude-code-devcontainer ./src
 ```
 
 ## Design Decisions To Make

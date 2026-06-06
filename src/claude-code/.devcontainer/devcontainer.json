@@ -51,6 +51,7 @@
   "mounts": [
     "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
     "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume",
+    "source=claude-code-vscode-extensions-${devcontainerId},target=/home/node/.vscode-server/extensions,type=volume",
     "source=${localEnv:HOME}/.config/gcloud,target=/home/node/.config/gcloud,type=bind,readonly"
   ],
   "containerEnv": {

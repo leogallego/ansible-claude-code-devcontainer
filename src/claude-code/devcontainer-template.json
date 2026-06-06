@@ -1,10 +1,10 @@
 {
   "id": "claude-code",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "name": "Claude Code (Node.js)",
   "description": "Node.js development environment with Claude Code CLI, proxy sandbox, zsh, and git-delta",
-  "documentationURL": "https://github.com/leogallego/claude-code-devcontainer/tree/main/src/claude-code",
-  "licenseURL": "https://github.com/leogallego/claude-code-devcontainer/blob/main/LICENSE",
+  "documentationURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/tree/main/src/claude-code",
+  "licenseURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/blob/main/LICENSE",
   "options": {
     "claudeCodeVersion": {
       "type": "string",

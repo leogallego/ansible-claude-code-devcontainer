@@ -120,7 +120,7 @@ File: `.github/workflows/release.yml`
 
 - **Trigger:** push to `main` (paths: `src/**`) + `workflow_dispatch`
 - **Action:** `devcontainers/action@v1` with `publish-templates: "true"` and `base-path-to-templates: "./src"`
-- **Registry:** `ghcr.io/leogallego/claude-code-devcontainer/<template-id>:<version>`
+- **Registry:** `ghcr.io/leogallego/ansible-claude-code-devcontainer/<template-id>:<version>`
 - **Permissions:** `packages: write`, `contents: read`
 
 ## Test Scripts
@@ -146,9 +146,9 @@ Each template gets a `test.sh` that verifies:
    ```yaml
    - name: Claude Code Dev Containers
      maintainer: Leonardo Gallego
-     contact: https://github.com/leogallego/claude-code-devcontainer/issues
-     repository: https://github.com/leogallego/claude-code-devcontainer
-     ociReference: ghcr.io/leogallego/claude-code-devcontainer
+     contact: https://github.com/leogallego/ansible-claude-code-devcontainer/issues
+     repository: https://github.com/leogallego/ansible-claude-code-devcontainer
+     ociReference: ghcr.io/leogallego/ansible-claude-code-devcontainer
    ```
 
 ## Out of Scope

@@ -87,7 +87,7 @@
     "REGISTRY_REDHAT_IO_TOKEN": "${localEnv:REGISTRY_REDHAT_IO_TOKEN}",
     "QUAY_TOKEN": "${localEnv:QUAY_TOKEN}",
     "DOCKER_TOKEN": "${localEnv:DOCKER_TOKEN}",
-    "DOCKER_USER": "${localEnv:DOCKER_USER}",
+    "DOCKER_USER": "${localEnv:DOCKER_USER}"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",

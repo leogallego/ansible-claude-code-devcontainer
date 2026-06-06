@@ -1,10 +1,10 @@
 {
   "id": "claude-code-ansible",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "name": "Ansible Development (Claude Code)",
   "description": "Ansible development environment with Claude Code CLI, ansible-lint, molecule, and proxy sandbox",
-  "documentationURL": "https://github.com/leogallego/claude-code-devcontainer/tree/main/src/claude-code-ansible",
-  "licenseURL": "https://github.com/leogallego/claude-code-devcontainer/blob/main/LICENSE",
+  "documentationURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/tree/main/src/claude-code-ansible",
+  "licenseURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/blob/main/LICENSE",
   "options": {
     "claudeCodeVersion": {
       "type": "string",

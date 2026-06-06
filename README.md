@@ -1,6 +1,6 @@
-# Claude Code Dev Container Templates
+# Ansible DevTools with Claude Code
 
-Dev container templates for Claude Code development environments, published to GHCR. Each template provides a pre-configured container with the Claude Code CLI, a network sandbox, and tooling tailored to a specific workflow.
+Dev container templates for Ansible and Claude Code development environments, published to GHCR. Each template provides a pre-configured container with the Claude Code CLI, a network sandbox, and tooling tailored to a specific workflow.
 
 ## Available Templates
 
@@ -36,10 +36,10 @@ Ansible development environment based on Fedora with the Ansible community dev t
 
 ```bash
 # Claude Code (Node.js)
-devcontainer templates apply -t ghcr.io/leogallego/claude-code-devcontainer/claude-code
+devcontainer templates apply -t ghcr.io/leogallego/ansible-claude-code-devcontainer/claude-code
 
 # Claude Code Ansible
-devcontainer templates apply -t ghcr.io/leogallego/claude-code-devcontainer/claude-code-ansible
+devcontainer templates apply -t ghcr.io/leogallego/ansible-claude-code-devcontainer/claude-code-ansible
 ```
 
 ## Template Options

@@ -92,7 +92,12 @@ RUN chmod +x /usr/local/bin/init-proxy.sh && \
   echo "node ALL=(root) NOPASSWD: /usr/local/bin/init-proxy.sh, /usr/sbin/tinyproxy" > /etc/sudoers.d/node-proxy && \
   chmod 0440 /etc/sudoers.d/node-proxy
 
-# Proxy toggle: create sentinel file when enabled
-RUN if [ "${ENABLE_PROXY}" = "true" ]; then touch /etc/tinyproxy/.proxy-enabled; fi
+# Proxy toggle: create sentinel file and set env vars when enabled
+RUN if [ "${ENABLE_PROXY}" = "true" ]; then \
+  touch /etc/tinyproxy/.proxy-enabled && \
+  echo 'HTTP_PROXY=http://127.0.0.1:8888' >> /etc/environment && \
+  echo 'HTTPS_PROXY=http://127.0.0.1:8888' >> /etc/environment && \
+  echo 'NO_PROXY=localhost,127.0.0.1' >> /etc/environment; \
+fi
 
 USER node

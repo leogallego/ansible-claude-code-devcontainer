@@ -61,12 +61,9 @@
     "ANTHROPIC_VERTEX_PROJECT_ID": "${localEnv:ANTHROPIC_VERTEX_PROJECT_ID}",
     "CLOUD_ML_REGION": "${localEnv:CLOUD_ML_REGION}",
     "GH_TOKEN": "${localEnv:GH_TOKEN}",
-    "HTTP_PROXY": "http://127.0.0.1:8888",
-    "HTTPS_PROXY": "http://127.0.0.1:8888",
-    "NO_PROXY": "localhost,127.0.0.1"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",
-  "postStartCommand": "echo ${CLOUD_ML_REGION} > /tmp/.cloud_ml_region && sudo tinyproxy -c /etc/tinyproxy/tinyproxy-passthrough.conf && if [ -f /etc/tinyproxy/.proxy-enabled ]; then (sleep 60 && sudo /usr/local/bin/init-proxy.sh > /tmp/proxy-enable.log 2>&1) & fi",
+  "postStartCommand": "echo ${CLOUD_ML_REGION} > /tmp/.cloud_ml_region && if [ -f /etc/tinyproxy/.proxy-enabled ]; then sudo tinyproxy -c /etc/tinyproxy/tinyproxy-passthrough.conf && (sleep 60 && sudo /usr/local/bin/init-proxy.sh > /tmp/proxy-enable.log 2>&1) & fi",
   "waitFor": "postStartCommand"
 }

@@ -6,7 +6,7 @@ ENV TZ="$TZ"
 ARG CLAUDE_CODE_VERSION=latest
 
 # Install Node.js, sudo, and CLI tools (Fedora uses dnf)
-RUN dnf install -y nodejs npm sudo curl jq gh && dnf clean all
+RUN dnf install -y nodejs npm sudo curl jq gh uv && dnf clean all
 
 # Install Claude Code
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}

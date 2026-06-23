@@ -35,7 +35,7 @@ The template accepts the following options:
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `claudeCodeVersion` | string | `latest` | Version of the Claude Code CLI to install. |
-| `timezone` | string | `America/Los_Angeles` | Container timezone (TZ identifier). |
+| `timezone` | string | `America/Argentina/Buenos_Aires` | Container timezone (TZ identifier). |
 
 ## Contributing
 

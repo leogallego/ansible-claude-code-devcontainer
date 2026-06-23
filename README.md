@@ -53,6 +53,8 @@ npx @devcontainers/cli templates apply -t ghcr.io/leogallego/ansible-claude-code
 
 Then in VS Code: `Ctrl+Shift+P` / `Cmd+Shift+P` → **Dev Containers: Reopen in Container**
 
+First build takes a few minutes to pull the base image and install dependencies. Subsequent starts are fast.
+
 ## Template Options
 
 | Option | Type | Default | Description |

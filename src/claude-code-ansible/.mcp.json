@@ -10,7 +10,8 @@
       "command": "npx",
       "args": [
         "-y",
-        "@ansible/ansible-mcp-server"
+        "@ansible/ansible-mcp-server",
+        "--stdio"
       ]
     }
   }

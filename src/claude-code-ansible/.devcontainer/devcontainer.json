@@ -84,7 +84,7 @@
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",
-  "postCreateCommand": "claude mcp add --scope user ansible-know -- uvx ansible-know-mcp && claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server && claude plugin marketplace add leogallego/claude-ansible-skills && claude plugin install ansible-docs@claude-ansible-skills --scope user && claude plugin install ansible-good-practices@claude-ansible-skills --scope user && claude plugin install ansible-scaffold-collection@claude-ansible-skills --scope user && claude plugin install ansible-scaffold-ee@claude-ansible-skills --scope user && claude plugin install ansible-scaffold-role@claude-ansible-skills --scope user && claude plugin install ansible-zen@claude-ansible-skills --scope user",
+  "postCreateCommand": "claude mcp add --scope user ansible-know -- uvx ansible-know-mcp && claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server --stdio && claude plugin marketplace add leogallego/claude-ansible-skills && claude plugin install ansible-docs@claude-ansible-skills --scope user && claude plugin install ansible-good-practices@claude-ansible-skills --scope user && claude plugin install ansible-scaffold-collection@claude-ansible-skills --scope user && claude plugin install ansible-scaffold-ee@claude-ansible-skills --scope user && claude plugin install ansible-scaffold-role@claude-ansible-skills --scope user && claude plugin install ansible-zen@claude-ansible-skills --scope user",
   "postStartCommand": "/usr/local/bin/init-registry-auth.sh",
   "waitFor": "postStartCommand"
 }

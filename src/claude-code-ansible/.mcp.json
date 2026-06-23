@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "ansible-know": {
+      "command": "uvx",
+      "args": [
+        "ansible-know-mcp"
+      ]
+    },
+    "ansible": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ansible/ansible-mcp-server"
+      ]
+    }
+  }
+}

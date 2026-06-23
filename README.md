@@ -45,19 +45,13 @@ Built-in multi-registry authentication via environment variables — pass `REGIS
 
 ## Quick Start
 
-### VS Code
-
-1. Open the command palette (`Ctrl+Shift+P` / `Cmd+Shift+P`).
-2. Run **Dev Containers: Add Dev Container Configuration Files...**
-3. Search for `claude-code-ansible` and select the template.
-4. Configure the template options when prompted.
-5. Reopen the folder in the container.
-
-### CLI
+Apply the template to your project directory, then open it in VS Code and reopen in container:
 
 ```bash
-devcontainer templates apply -t ghcr.io/leogallego/ansible-claude-code-devcontainer/claude-code-ansible
+npx @devcontainers/cli templates apply -t ghcr.io/leogallego/ansible-claude-code-devcontainer/claude-code-ansible
 ```
+
+Then in VS Code: `Ctrl+Shift+P` / `Cmd+Shift+P` → **Dev Containers: Reopen in Container**
 
 ## Template Options
 

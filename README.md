@@ -9,11 +9,11 @@ AI-assisted Ansible development environment as a dev container template. Claude 
 
 ### Ansible Toolchain
 
-Built on `ghcr.io/ansible/community-ansible-dev-tools:latest` (Fedora) — the same toolchain Red Hat ships for Ansible development:
+Built on `ghcr.io/ansible/community-ansible-dev-tools:latest` (Fedora) — the same toolchain Red Hat ships for Ansible development. Includes all 10 tools from the [ansible-dev-tools](https://github.com/ansible/ansible-dev-tools) bundle:
 
-- ansible, ansible-lint, ansible-navigator, ansible-builder
-- molecule, pytest, podman (execution environment ready)
-- python, pip, git
+ansible-core, ansible-builder, ansible-creator, ansible-lint, ansible-navigator, ansible-sign, molecule, pytest-ansible, tox-ansible, ansible-dev-environment
+
+Plus podman for execution environment support.
 
 ### AI Tooling
 
@@ -22,6 +22,18 @@ Claude Code CLI with Ansible-specific integrations configured at container start
 - **[ansible-know](https://github.com/ansible-community/ansible-know-mcp)** MCP server — module/role documentation lookup, Galaxy search, skill generation
 - **[ansible-mcp-server](https://github.com/ansible/ansible-mcp-server)** — ansible-lint, ansible-navigator, project scaffolding, best practices
 - **[ansible-skills plugin](https://github.com/leogallego/claude-ansible-skills)** — 6 skills for scaffolding roles/collections/EEs, reviewing code against CoP good practices, querying Ansible docs, and applying the Zen of Ansible
+
+All integrations are configured automatically via `postCreateCommand` — no manual MCP setup required.
+
+### Vertex AI Support
+
+The template supports Claude Code via Vertex AI. Set these environment variables on your host:
+
+- `CLAUDE_CODE_USE_VERTEX` — enable Vertex AI backend
+- `ANTHROPIC_VERTEX_PROJECT_ID` — your GCP project ID
+- `CLOUD_ML_REGION` — Vertex AI region (e.g., `us-east5`)
+
+The container mounts `~/.config/gcloud` read-only for credential access.
 
 ### VS Code Extensions
 
@@ -54,34 +66,16 @@ devcontainer templates apply -t ghcr.io/leogallego/ansible-claude-code-devcontai
 | `claudeCodeVersion` | string | `latest` | Version of the Claude Code CLI to install. |
 | `timezone` | string | `America/Argentina/Buenos_Aires` | Container timezone (TZ identifier). |
 
-## AI-Assisted Ansible Development
-
-The MCP servers and skills plugin give Claude Code deep Ansible awareness inside the container:
-
-- **Module docs** — look up parameters, examples, and return values for any Ansible module directly from official documentation or Galaxy
-- **Best practices review** — review roles and playbooks against Red Hat Communities of Practice automation good practices
-- **Scaffolding** — generate new roles, collections, and execution environments following CoP conventions
-- **Linting** — run ansible-lint with fix suggestions from within Claude Code
-- **Galaxy search** — discover collections and modules by keyword without leaving the terminal
-
-All integrations are configured automatically via `postCreateCommand` — no manual MCP setup required.
-
-## Vertex AI Support
-
-The template supports Claude Code via Vertex AI. Set these environment variables on your host:
-
-- `CLAUDE_CODE_USE_VERTEX` — enable Vertex AI backend
-- `ANTHROPIC_VERTEX_PROJECT_ID` — your GCP project ID
-- `CLOUD_ML_REGION` — Vertex AI region (e.g., `us-east5`)
-
-The container mounts `~/.config/gcloud` read-only for credential access.
-
 ## Contributing
 
 1. Fork the repository.
 2. Make changes in the `src/` directory.
 3. Test locally with `devcontainer templates apply` or by opening the template in VS Code.
 4. Open a pull request.
+
+## Author
+
+[Leo Gallego](https://github.com/leogallego)
 
 ## License
 

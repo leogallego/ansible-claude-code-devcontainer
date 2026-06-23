@@ -92,6 +92,7 @@
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",
+  "postCreateCommand": "claude mcp add --scope user ansible-know -- uvx ansible-know-mcp && claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server",
   "postStartCommand": "echo ${CLOUD_ML_REGION} > /tmp/.cloud_ml_region && /usr/local/bin/init-registry-auth.sh && if [ -f /etc/tinyproxy/.proxy-enabled ]; then tinyproxy -c /etc/tinyproxy/tinyproxy-passthrough.conf && (sleep 60 && /usr/local/bin/init-proxy.sh > /tmp/proxy-enable.log 2>&1) & fi",
   "postAttachCommand": "if [ -f /etc/tinyproxy/.proxy-enabled ]; then echo 'Proxy running in passthrough mode. Filtering activates ~60s after startup.\n  Status:  sudo /usr/local/bin/init-proxy.sh --status\n  Disable: sudo /usr/local/bin/init-proxy.sh --disable'; fi",
   "waitFor": "postStartCommand"

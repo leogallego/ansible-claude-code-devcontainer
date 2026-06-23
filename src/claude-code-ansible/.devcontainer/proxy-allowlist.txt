@@ -25,6 +25,10 @@
 ^pypi\.org$
 ^files\.pythonhosted\.org$
 
+# Ansible Galaxy
+^galaxy\.ansible\.com$
+^old-galaxy\.ansible\.com$
+
 # Vertex AI (optional — needed if using Google Cloud)
 ^oauth2\.googleapis\.com$
 ^.*-aiplatform\.googleapis\.com$

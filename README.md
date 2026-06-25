@@ -27,33 +27,88 @@ All integrations are configured automatically via `postCreateCommand` — no man
 
 ### Vertex AI Support
 
-The template supports Claude Code via Vertex AI. Set these environment variables on your host:
+The template supports Claude Code via Vertex AI. Set these environment variables on your host before opening the container:
 
-- `CLAUDE_CODE_USE_VERTEX` — enable Vertex AI backend
-- `ANTHROPIC_VERTEX_PROJECT_ID` — your GCP project ID
-- `CLOUD_ML_REGION` — Vertex AI region (e.g., `us-east5`)
+| Variable | Description |
+|----------|-------------|
+| `CLAUDE_CODE_USE_VERTEX` | Enable Vertex AI backend |
+| `ANTHROPIC_VERTEX_PROJECT_ID` | Your GCP project ID |
+| `CLOUD_ML_REGION` | Vertex AI region (e.g., `us-east5`) |
 
 The container mounts `~/.config/gcloud` read-only for credential access.
+
+### Environment Variables
+
+All environment variables are optional and forwarded from your host automatically.
+
+| Variable | Description |
+|----------|-------------|
+| `GH_TOKEN` | GitHub personal access token (for `gh` CLI and GitHub MCP) |
+| `AH_TOKEN` | Ansible Automation Hub token |
+| `REGISTRY_REDHAT_IO_TOKEN` | Red Hat container registry (`registry.redhat.io`) token |
+| `QUAY_TOKEN` | Quay.io container registry token |
+| `DOCKER_TOKEN` | Docker Hub token |
+| `DOCKER_USER` | Docker Hub username (required with `DOCKER_TOKEN`) |
+
+Container registry tokens are used at startup to authenticate via `podman login`, enabling pulls of execution environment images from private registries.
+
+### Persistent Volumes
+
+The container uses named Docker volumes to persist data across rebuilds:
+
+- **Bash history** — command history survives container recreation
+- **Claude config** (`~/.claude`) — Claude Code settings, MCP config, and session data
+- **VS Code extensions** — avoids reinstalling extensions on rebuild
 
 ### VS Code Extensions
 
 Claude Code, Ansible, YAML, Python, Pylance, debugpy, Black, GitLens, AsciiDoc, Remote Containers
 
-### Container Registry Auth
+## Prerequisites
 
-Built-in multi-registry authentication via environment variables — pass `REGISTRY_REDHAT_IO_TOKEN`, `QUAY_TOKEN`, or `DOCKER_TOKEN` to authenticate with Red Hat, Quay.io, or Docker Hub automatically at startup.
+- **Docker** or **Podman** running on your host
+- **VS Code** with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- A Claude Code account (Anthropic API key or Vertex AI credentials)
 
 ## Quick Start
 
-Apply the template to your project directory, then open it in VS Code and reopen in container:
+### Option 1: CLI
+
+Apply the template to your project directory, then open it in VS Code:
 
 ```bash
-npx @devcontainers/cli templates apply -t ghcr.io/leogallego/ansible-claude-code-devcontainer/claude-code-ansible
+cd your-ansible-project/
+npx @devcontainers/cli templates apply \
+  -t ghcr.io/leogallego/ansible-claude-code-devcontainer/claude-code-ansible
 ```
 
 Then in VS Code: `Ctrl+Shift+P` / `Cmd+Shift+P` → **Dev Containers: Reopen in Container**
 
-First build takes a few minutes to pull the base image and install dependencies. Subsequent starts are fast.
+### Option 2: VS Code UI
+
+1. Open your project in VS Code
+2. `Ctrl+Shift+P` / `Cmd+Shift+P` → **Dev Containers: Add Dev Container Configuration Files...**
+3. Select **Add to workspace** or **Add to user data folder**
+4. Search for `claude-code-ansible`
+5. Choose template options (Claude Code version, timezone)
+6. **Dev Containers: Reopen in Container**
+
+### First start
+
+The first build pulls the base image and installs dependencies (~3-5 minutes). On startup the container automatically:
+
+- Installs the Claude Code CLI
+- Registers the ansible-know and ansible-mcp-server MCP servers
+- Installs the ansible-skills plugin with all 6 skills
+- Runs container registry authentication (if credentials are provided)
+
+Subsequent starts reuse cached layers and are fast.
+
+### Authenticating Claude Code
+
+Once inside the container, run `claude` in the terminal. On first launch you'll be prompted to authenticate — follow the instructions to log in with your Anthropic account or API key.
+
+For Vertex AI authentication, see the [Vertex AI Support](#vertex-ai-support) section below.
 
 ## Template Options
 

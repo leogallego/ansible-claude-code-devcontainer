@@ -28,16 +28,13 @@
         "redhat.vscode-yaml",
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "ms-python.debugpy",
         "ms-python.black-formatter",
         "eamodio.gitlens",
-        "asciidoctor.asciidoctor-vscode",
-        "ms-vscode-remote.remote-containers"
+        "asciidoctor.asciidoctor-vscode"
       ],
       "settings": {
         "editor.formatOnSave": true,
         "python.defaultInterpreterPath": "/usr/bin/python3",
-        "python.formatting.provider": "black",
         "[python]": {
           "editor.defaultFormatter": "ms-python.black-formatter"
         },
@@ -69,9 +66,12 @@
     "source=claude-code-vscode-extensions-${devcontainerId},target=/root/.vscode-server/extensions,type=volume",
     "source=${localEnv:HOME}/.config/gcloud,target=/root/.config/gcloud,type=bind,readonly"
   ],
+  "initializeCommand": "mkdir -p ${HOME}/.config/gcloud",
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",
+    "HISTFILE": "/commandhistory/.bash_history",
     "CLAUDE_CONFIG_DIR": "/root/.claude",
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
     "CLAUDE_CODE_USE_VERTEX": "${localEnv:CLAUDE_CODE_USE_VERTEX}",
     "ANTHROPIC_VERTEX_PROJECT_ID": "${localEnv:ANTHROPIC_VERTEX_PROJECT_ID}",
     "CLOUD_ML_REGION": "${localEnv:CLOUD_ML_REGION}",
@@ -80,7 +80,8 @@
     "REGISTRY_REDHAT_IO_TOKEN": "${localEnv:REGISTRY_REDHAT_IO_TOKEN}",
     "QUAY_TOKEN": "${localEnv:QUAY_TOKEN}",
     "DOCKER_TOKEN": "${localEnv:DOCKER_TOKEN}",
-    "DOCKER_USER": "${localEnv:DOCKER_USER}"
+    "DOCKER_USER": "${localEnv:DOCKER_USER}",
+    "ANSIBLE_COLLECTIONS_PATH": "/workspace/collections:/root/.ansible/collections:/usr/share/ansible/collections"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",

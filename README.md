@@ -43,6 +43,7 @@ All environment variables are optional and forwarded from your host automaticall
 
 | Variable | Description |
 |----------|-------------|
+| `ANTHROPIC_API_KEY` | Anthropic API key for Claude Code (alternative to `claude login`) |
 | `GH_TOKEN` | GitHub personal access token (for `gh` CLI and GitHub MCP) |
 | `AH_TOKEN` | Ansible Automation Hub token |
 | `REGISTRY_REDHAT_IO_TOKEN` | Red Hat container registry (`registry.redhat.io`) token |
@@ -62,7 +63,7 @@ The container uses named Docker volumes to persist data across rebuilds:
 
 ### VS Code Extensions
 
-Claude Code, Ansible, YAML, Python, Pylance, debugpy, Black, GitLens, AsciiDoc, Remote Containers
+Claude Code, Ansible, YAML, Python, Pylance, Black, GitLens, AsciiDoc
 
 ## Prerequisites
 

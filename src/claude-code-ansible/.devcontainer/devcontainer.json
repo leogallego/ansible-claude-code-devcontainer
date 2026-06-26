@@ -1,5 +1,5 @@
 {
-  "name": "Ansible Development (Claude Code)",
+  "name": "Ansible Development Tools (AI & Claude Code)",
   "build": {
     "dockerfile": "Dockerfile",
     "args": {

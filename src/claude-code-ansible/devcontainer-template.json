@@ -1,7 +1,7 @@
 {
   "id": "claude-code-ansible",
-  "version": "1.2.5",
-  "name": "Ansible Development (Claude Code)",
+  "version": "1.2.6",
+  "name": "Ansible Development Tools (AI & Claude Code)",
   "description": "Ansible development environment with Claude Code CLI, ansible-lint, molecule, and ansible-navigator",
   "documentationURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/tree/main/src/claude-code-ansible",
   "licenseURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/blob/main/LICENSE",

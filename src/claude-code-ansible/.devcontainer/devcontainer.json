@@ -81,6 +81,8 @@
     "QUAY_TOKEN": "${localEnv:QUAY_TOKEN}",
     "DOCKER_TOKEN": "${localEnv:DOCKER_TOKEN}",
     "DOCKER_USER": "${localEnv:DOCKER_USER}",
+    "ANSIBLE_GALAXY_SERVER_AH_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AH_TOKEN}",
+    "ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN}",
     "ANSIBLE_COLLECTIONS_PATH": "/workspace/collections:/root/.ansible/collections:/usr/share/ansible/collections"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",

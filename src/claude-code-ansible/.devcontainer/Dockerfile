@@ -6,12 +6,16 @@ ENV TZ="$TZ"
 ARG CLAUDE_CODE_VERSION=latest
 
 # Install Node.js, sudo, and CLI tools (Fedora uses dnf)
-RUN dnf install -y nodejs npm sudo curl jq gh uv && dnf clean all
+RUN dnf install -y nodejs npm sudo curl jq gh uv tmux && dnf clean all
 
 # Install Claude Code
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
 
 ENV DEVCONTAINER=true
+
+# Symlink ~/.ansible to /workspace/.ansible so all Ansible tools
+# (galaxy, lint, navigator) converge under the workspace mount
+RUN rm -rf /root/.ansible && ln -s /workspace/.ansible /root/.ansible
 
 # Copy and set up registry auth script
 COPY init-registry-auth.sh /usr/local/bin/

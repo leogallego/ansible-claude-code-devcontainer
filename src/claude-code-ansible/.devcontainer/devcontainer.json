@@ -67,7 +67,7 @@
     "source=${localEnv:HOME}/.config/gcloud,target=/root/.config/gcloud,type=bind,readonly",
     "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,readonly"
   ],
-  "initializeCommand": "mkdir -p ${HOME}/.config/gcloud && touch ${HOME}/.gitconfig",
+  "initializeCommand": "mkdir -p ${HOME}/.config/gcloud; touch ${HOME}/.gitconfig 2>/dev/null || true",
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",
     "HISTFILE": "/commandhistory/.bash_history",

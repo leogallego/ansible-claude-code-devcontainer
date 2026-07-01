@@ -64,9 +64,10 @@
     "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
     "source=claude-code-config-${devcontainerId},target=/root/.claude,type=volume",
     "source=claude-code-vscode-extensions-${devcontainerId},target=/root/.vscode-server/extensions,type=volume",
-    "source=${localEnv:HOME}/.config/gcloud,target=/root/.config/gcloud,type=bind,readonly"
+    "source=${localEnv:HOME}/.config/gcloud,target=/root/.config/gcloud,type=bind,readonly",
+    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,readonly"
   ],
-  "initializeCommand": "mkdir -p ${HOME}/.config/gcloud",
+  "initializeCommand": "mkdir -p ${HOME}/.config/gcloud && touch ${HOME}/.gitconfig",
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",
     "HISTFILE": "/commandhistory/.bash_history",

@@ -1,4 +1,4 @@
-FROM ghcr.io/ansible/community-ansible-dev-tools:latest
+FROM ghcr.io/ansible/community-ansible-dev-tools:v26.6.1
 
 ARG TZ
 ENV TZ="$TZ"

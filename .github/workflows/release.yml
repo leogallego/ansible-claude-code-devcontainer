@@ -1,19 +1,27 @@
 name: Release Dev Container Templates
 on:
   push:
-    branches: [main]
-    paths: ['src/**']
+    tags: ['v*']
   workflow_dispatch:
 
 jobs:
   publish:
-    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v7
+
+      - name: Verify tag matches template version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/v}"
+          TEMPLATE_VERSION=$(jq -r .version src/claude-code-ansible/devcontainer-template.json)
+          if [ "$TAG_VERSION" != "$TEMPLATE_VERSION" ]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match template version ($TEMPLATE_VERSION)"
+            exit 1
+          fi
 
       - name: Publish Templates
         uses: devcontainers/action@v1
@@ -22,3 +30,9 @@ jobs:
           base-path-to-templates: "./src"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: gh release create "$GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -4,12 +4,20 @@
 # Changes to this file are lost on container rebuild.
 
 providers:
-  # Anthropic (uses ANTHROPIC_API_KEY already passed to container)
-  anthropic:
-    engine: anthropic
-    api_key_env_var_name: "ANTHROPIC_API_KEY"
+  # Anthropic via Vertex AI (uses gcloud ADC from mounted ~/.config/gcloud)
+  # Requires GOOGLE_VERTEX_PROJECT and GOOGLE_VERTEX_LOCATION env vars
+  vertex-claude:
+    engine: vertex-anthropic
     models:
-      claude-sonnet-4-20250514: {}
+      claude-sonnet-4:
+        model_id: "claude-sonnet-4@20250514"
+
+  # Anthropic direct API (uses ANTHROPIC_API_KEY)
+  # anthropic:
+  #   engine: anthropic
+  #   api_key_env_var_name: "ANTHROPIC_API_KEY"
+  #   models:
+  #     claude-sonnet-4-20250514: {}
 
   # OpenRouter — single key for 200+ models from multiple providers
   # openrouter:

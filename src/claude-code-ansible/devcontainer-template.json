@@ -5,20 +5,7 @@
   "description": "Ansible development environment with Claude Code CLI, ansible-lint, molecule, and ansible-navigator",
   "documentationURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/tree/main/src/claude-code-ansible",
   "licenseURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/blob/main/LICENSE",
-  "options": {
-    "claudeCodeVersion": {
-      "type": "string",
-      "description": "Claude Code version to install",
-      "proposals": ["latest"],
-      "default": "latest"
-    },
-    "timezone": {
-      "type": "string",
-      "description": "Container timezone (TZ)",
-      "proposals": ["America/Los_Angeles", "America/New_York", "Europe/London", "UTC"],
-      "default": "America/Argentina/Buenos_Aires"
-    }
-  },
+  "options": {},
   "keywords": ["claude", "claude-code", "anthropic", "ai", "ansible", "redhat"],
   "platforms": ["Any"]
 }

@@ -1,11 +1,7 @@
 {
   "name": "Ansible Development Tools (AI & Claude Code)",
   "build": {
-    "dockerfile": "Dockerfile",
-    "args": {
-      "TZ": "${templateOption:timezone}",
-      "CLAUDE_CODE_VERSION": "${templateOption:claudeCodeVersion}"
-    }
+    "dockerfile": "Dockerfile"
   },
   "runArgs": [
     "--cap-add=CAP_MKNOD",
@@ -65,7 +61,8 @@
     "source=claude-code-config-${devcontainerId},target=/root/.claude,type=volume",
     "source=claude-code-vscode-extensions-${devcontainerId},target=/root/.vscode-server/extensions,type=volume",
     "source=${localEnv:HOME}/.config/gcloud,target=/root/.config/gcloud,type=bind,readonly",
-    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,readonly"
+    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,readonly",
+    "source=claude-code-gh-config-${devcontainerId},target=/root/.config/gh,type=volume"
   ],
   "initializeCommand": "mkdir -p ${HOME}/.config/gcloud; touch ${HOME}/.gitconfig 2>/dev/null || true",
   "containerEnv": {
@@ -84,11 +81,13 @@
     "DOCKER_USER": "${localEnv:DOCKER_USER}",
     "ANSIBLE_GALAXY_SERVER_AH_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AH_TOKEN}",
     "ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN}",
-    "ANSIBLE_COLLECTIONS_PATH": "/workspace/collections:/root/.ansible/collections:/usr/share/ansible/collections"
+    "ANSIBLE_COLLECTIONS_PATH": "/workspace/collections:/root/.ansible/collections:/usr/share/ansible/collections",
+    "ANSIBLE_ROLES_PATH": "/workspace/roles:/root/.ansible/roles:/usr/share/ansible/roles",
+    "XDG_CACHE_HOME": "/workspace/.cache"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",
-  "postCreateCommand": "(claude mcp add --scope user ansible-know -- uvx ansible-know-mcp || true) && (claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server --stdio || true) && (claude plugin marketplace add leogallego/claude-ansible-skills || true) && (claude plugin install ansible-docs@claude-ansible-skills --scope user || true) && (claude plugin install ansible-good-practices@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-collection@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-ee@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-role@claude-ansible-skills --scope user || true) && (claude plugin install ansible-zen@claude-ansible-skills --scope user || true)",
+  "postCreateCommand": "mkdir -p /workspace/.ansible/{collections,roles,galaxy_cache,tmp} /workspace/.cache && (claude mcp add --scope user ansible-know -- uvx ansible-know-mcp || true) && (claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server --stdio || true) && (claude plugin marketplace add leogallego/claude-ansible-skills || true) && (claude plugin install ansible-docs@claude-ansible-skills --scope user || true) && (claude plugin install ansible-good-practices@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-collection@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-ee@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-role@claude-ansible-skills --scope user || true) && (claude plugin install ansible-zen@claude-ansible-skills --scope user || true)",
   "postStartCommand": "/usr/local/bin/init-registry-auth.sh",
   "waitFor": "postStartCommand"
 }

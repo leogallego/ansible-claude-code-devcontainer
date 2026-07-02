@@ -3,7 +3,7 @@ FROM ghcr.io/ansible/community-ansible-dev-tools:v26.6.1
 ENV TZ="UTC"
 
 # Install Node.js, sudo, and CLI tools (Fedora uses dnf)
-RUN dnf install -y nodejs npm sudo curl jq gh uv tmux && dnf clean all
+RUN dnf install -y nodejs npm sudo curl jq gh uv tmux unzip && dnf clean all
 
 # Install Claude Code
 RUN npm install -g @anthropic-ai/claude-code

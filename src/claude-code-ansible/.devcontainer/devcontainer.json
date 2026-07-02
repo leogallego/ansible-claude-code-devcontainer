@@ -1,11 +1,7 @@
 {
   "name": "Ansible Development Tools (AI & Claude Code)",
   "build": {
-    "dockerfile": "Dockerfile",
-    "args": {
-      "TZ": "${templateOption:timezone}",
-      "CLAUDE_CODE_VERSION": "${templateOption:claudeCodeVersion}"
-    }
+    "dockerfile": "Dockerfile"
   },
   "runArgs": [
     "--cap-add=CAP_MKNOD",

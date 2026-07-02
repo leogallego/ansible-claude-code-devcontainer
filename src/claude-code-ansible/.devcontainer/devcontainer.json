@@ -50,6 +50,8 @@
         "ansible.lightspeed.apiEndpoint": "http://localhost:8788",
         "ansible.lightspeed.modelName": "vertex-claude/claude-sonnet-4",
         "ansible.lightspeed.apiKey": "dummy",
+        "gitlens.showWelcomeOnInstall": false,
+        "gitlens.showWhatsNewAfterUpgrades": false,
         "terminal.integrated.defaultProfile.linux": "bash",
         "terminal.integrated.profiles.linux": {
           "bash": {

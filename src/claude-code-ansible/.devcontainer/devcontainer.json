@@ -81,13 +81,18 @@
     "DOCKER_USER": "${localEnv:DOCKER_USER}",
     "ANSIBLE_GALAXY_SERVER_AH_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AH_TOKEN}",
     "ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN}",
+    "GOOGLE_VERTEX_PROJECT": "${localEnv:GOOGLE_VERTEX_PROJECT}",
+    "GOOGLE_VERTEX_LOCATION": "${localEnv:GOOGLE_VERTEX_LOCATION}",
+    "OPENROUTER_API_KEY": "${localEnv:OPENROUTER_API_KEY}",
+    "GOOGLE_GENERATIVE_AI_API_KEY": "${localEnv:GOOGLE_GENERATIVE_AI_API_KEY}",
     "ANSIBLE_COLLECTIONS_PATH": "/workspace/collections:/root/.ansible/collections:/usr/share/ansible/collections",
     "ANSIBLE_ROLES_PATH": "/workspace/roles:/root/.ansible/roles:/usr/share/ansible/roles",
     "XDG_CACHE_HOME": "/workspace/.cache"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",
-  "postCreateCommand": "mkdir -p /workspace/.ansible/{collections,roles,galaxy_cache,tmp} /workspace/.cache && (claude mcp add --scope user ansible-know -- uvx ansible-know-mcp || true) && (claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server --stdio || true) && (claude plugin marketplace add leogallego/claude-ansible-skills || true) && (claude plugin install ansible-docs@claude-ansible-skills --scope user || true) && (claude plugin install ansible-good-practices@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-collection@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-ee@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-role@claude-ansible-skills --scope user || true) && (claude plugin install ansible-zen@claude-ansible-skills --scope user || true)",
+  "postCreateCommand": "mkdir -p /workspace/.ansible/{collections,roles,galaxy_cache,tmp} /workspace/.cache && (claude mcp add --scope user ansible-know -- uvx ansible-know-mcp || true) && (claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server --stdio || true) && (claude plugin marketplace add leogallego/claude-ansible-skills || true) && (claude plugin install ansible-docs@claude-ansible-skills --scope user || true) && (claude plugin install ansible-good-practices@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-collection@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-ee@claude-ansible-skills --scope user || true) && (claude plugin install ansible-scaffold-role@claude-ansible-skills --scope user || true) && (claude plugin install ansible-zen@claude-ansible-skills --scope user || true) ",
   "postStartCommand": "/usr/local/bin/init-registry-auth.sh",
+  "postAttachCommand": "([ -f /opt/abbenay-provider.vsix ] && mkdir -p /root/.vscode-server/extensions && unzip -qo /opt/abbenay-provider.vsix 'extension/*' -d /tmp/abbenay-vsix && rm -rf /root/.vscode-server/extensions/redhat.abbenay-provider && mv /tmp/abbenay-vsix/extension /root/.vscode-server/extensions/redhat.abbenay-provider && rm -rf /tmp/abbenay-vsix || true)",
   "waitFor": "postStartCommand"
 }

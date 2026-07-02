@@ -45,6 +45,11 @@
         "yaml.schemas": {
           "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json": ["playbooks/*.yml", "playbooks/*.yaml", "**/tasks/*.yml", "**/tasks/*.yaml"]
         },
+        "ansible.lightspeed.enabled": true,
+        "ansible.lightspeed.provider": "rhcustom",
+        "ansible.lightspeed.apiEndpoint": "http://localhost:8788",
+        "ansible.lightspeed.modelName": "vertex-claude/claude-sonnet-4",
+        "ansible.lightspeed.apiKey": "dummy",
         "terminal.integrated.defaultProfile.linux": "bash",
         "terminal.integrated.profiles.linux": {
           "bash": {

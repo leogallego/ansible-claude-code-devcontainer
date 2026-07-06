@@ -33,7 +33,7 @@ if [ ! -f "$DAEMON" ]; then
   exit 1
 fi
 
-nohup "$DAEMON" serve --port 8788 >> "$LOG" 2>&1 &
+setsid "$DAEMON" serve --port 8788 >> "$LOG" 2>&1 &
 DAEMON_PID=$!
 sleep 2
 

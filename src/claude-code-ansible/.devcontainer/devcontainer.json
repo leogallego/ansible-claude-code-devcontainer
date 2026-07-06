@@ -1,5 +1,5 @@
 {
-  "name": "Ansible Development Tools (AI & Claude Code)",
+  "name": "Ansible Development Tools (AI-enhanced ansible-dev-tools)",
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -81,12 +81,12 @@
     "ANTHROPIC_VERTEX_PROJECT_ID": "${localEnv:ANTHROPIC_VERTEX_PROJECT_ID}",
     "CLOUD_ML_REGION": "${localEnv:CLOUD_ML_REGION}",
     "GH_TOKEN": "${localEnv:GH_TOKEN}",
-    "AH_TOKEN": "${localEnv:AH_TOKEN}",
+    "AH_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN}",
     "REGISTRY_REDHAT_IO_TOKEN": "${localEnv:REGISTRY_REDHAT_IO_TOKEN}",
     "QUAY_TOKEN": "${localEnv:QUAY_TOKEN}",
     "DOCKER_TOKEN": "${localEnv:DOCKER_TOKEN}",
     "DOCKER_USER": "${localEnv:DOCKER_USER}",
-    "ANSIBLE_GALAXY_SERVER_AH_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AH_TOKEN}",
+    "ANSIBLE_GALAXY_SERVER_AH_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN}",
     "ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN": "${localEnv:ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN}",
     "GOOGLE_VERTEX_PROJECT": "${localEnv:GOOGLE_VERTEX_PROJECT}",
     "GOOGLE_VERTEX_LOCATION": "${localEnv:GOOGLE_VERTEX_LOCATION}",

@@ -22,7 +22,7 @@ RUN if [ "$ABBENAY_VERSION" != "none" ]; then \
 RUN mkdir -p /root/.config/abbenay
 COPY abbenay-config.yaml /root/.config/abbenay/config.yaml
 
-ARG DEVCONTAINER_VERSION=1.4.3
+ARG DEVCONTAINER_VERSION=1.4.4
 RUN echo "$DEVCONTAINER_VERSION" > /etc/devcontainer-version
 ENV DEVCONTAINER_TEMPLATE_VERSION=$DEVCONTAINER_VERSION
 ENV DEVCONTAINER=true
@@ -31,8 +31,8 @@ ENV DEVCONTAINER=true
 # (galaxy, lint, navigator) converge under the workspace mount
 RUN rm -rf /root/.ansible && ln -s /workspace/.ansible /root/.ansible
 
-# Copy and set up registry auth script
-COPY init-registry-auth.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/init-registry-auth.sh
+# Copy and set up startup scripts
+COPY init-registry-auth.sh init-abbenay.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/init-registry-auth.sh /usr/local/bin/init-abbenay.sh
 
 WORKDIR /workspace

@@ -5,7 +5,8 @@
 LOG=/tmp/abbenay-init.log
 VSIX=/opt/abbenay-provider.vsix
 EXT_DIR=/root/.vscode-server/extensions/redhat.abbenay-provider
-DAEMON="$EXT_DIR/bin/abbenay-daemon-linux-x64"
+ARCH=$(uname -m | sed 's/x86_64/x64/' | sed 's/aarch64/arm64/')
+DAEMON="$EXT_DIR/bin/abbenay-daemon-linux-$ARCH"
 
 echo "[$(date -Iseconds)] init-abbenay.sh starting" > "$LOG"
 

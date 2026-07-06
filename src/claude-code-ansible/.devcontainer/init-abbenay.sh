@@ -34,8 +34,8 @@ VERSION=$(jq -r .version "$EXT_DIR/package.json" 2>/dev/null)
 if [ -n "$VERSION" ] && [ -f "$EXTENSIONS_JSON" ]; then
   ENTRY="{\"identifier\":{\"id\":\"redhat.abbenay-provider\"},\"version\":\"$VERSION\",\"location\":{\"\$mid\":1,\"path\":\"$EXT_DIR\",\"scheme\":\"file\"},\"relativeLocation\":\"redhat.abbenay-provider\",\"metadata\":{\"isApplicationScoped\":true,\"installedTimestamp\":$(date +%s)000,\"source\":\"vsix\"}}"
   if ! grep -q '"redhat.abbenay-provider"' "$EXTENSIONS_JSON" 2>/dev/null; then
-    CONTENT=$(cat "$EXTENSIONS_JSON")
-    echo "$CONTENT" | sed "s/^\[/[$ENTRY,/" > "$EXTENSIONS_JSON"
+    TMPJSON=$(mktemp)
+    jq ". + [$ENTRY]" "$EXTENSIONS_JSON" > "$TMPJSON" && mv "$TMPJSON" "$EXTENSIONS_JSON"
     echo "[$(date -Iseconds)] Registered extension in extensions.json (v$VERSION)" >> "$LOG"
   else
     echo "[$(date -Iseconds)] Extension already registered in extensions.json" >> "$LOG"

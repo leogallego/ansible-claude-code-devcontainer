@@ -80,7 +80,7 @@ The container uses named container volumes (Docker or Podman) to persist data ac
 
 ### VS Code Extensions
 
-Claude Code, Ansible, YAML, Python, Pylance, Black, GitLens, AsciiDoc
+Claude Code, Ansible, YAML, Python, Pylance, Black, AsciiDoc
 
 ## Prerequisites
 

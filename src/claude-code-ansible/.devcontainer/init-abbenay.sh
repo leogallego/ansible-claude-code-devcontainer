@@ -1,10 +1,11 @@
 #!/bin/sh
-# Extract the Abbenay VSIX and start the daemon.
+# Extract the Abbenay VSIX, register it with VS Code, and start the daemon.
 # Called from postStartCommand. Logs to /tmp/abbenay-init.log for debugging.
 
 LOG=/tmp/abbenay-init.log
 VSIX=/opt/abbenay-provider.vsix
 EXT_DIR=/root/.vscode-server/extensions/redhat.abbenay-provider
+EXTENSIONS_JSON=/root/.vscode-server/extensions/extensions.json
 ARCH=$(uname -m | sed 's/x86_64/x64/' | sed 's/aarch64/arm64/')
 DAEMON="$EXT_DIR/bin/abbenay-daemon-linux-$ARCH"
 
@@ -28,7 +29,22 @@ else
   exit 1
 fi
 
-# 2. Start daemon if binary exists
+# 2. Register extension in VS Code's extensions.json
+VERSION=$(jq -r .version "$EXT_DIR/package.json" 2>/dev/null)
+if [ -n "$VERSION" ] && [ -f "$EXTENSIONS_JSON" ]; then
+  ENTRY="{\"identifier\":{\"id\":\"redhat.abbenay-provider\"},\"version\":\"$VERSION\",\"location\":{\"\$mid\":1,\"path\":\"$EXT_DIR\",\"scheme\":\"file\"},\"relativeLocation\":\"redhat.abbenay-provider\",\"metadata\":{\"isApplicationScoped\":true,\"installedTimestamp\":$(date +%s)000,\"source\":\"vsix\"}}"
+  if ! grep -q '"redhat.abbenay-provider"' "$EXTENSIONS_JSON" 2>/dev/null; then
+    CONTENT=$(cat "$EXTENSIONS_JSON")
+    echo "$CONTENT" | sed "s/^\[/[$ENTRY,/" > "$EXTENSIONS_JSON"
+    echo "[$(date -Iseconds)] Registered extension in extensions.json (v$VERSION)" >> "$LOG"
+  else
+    echo "[$(date -Iseconds)] Extension already registered in extensions.json" >> "$LOG"
+  fi
+else
+  echo "[$(date -Iseconds)] WARNING: could not register in extensions.json (version=$VERSION)" >> "$LOG"
+fi
+
+# 3. Start daemon if binary exists
 if [ ! -f "$DAEMON" ]; then
   echo "[$(date -Iseconds)] ERROR: daemon binary not found at $DAEMON" >> "$LOG"
   exit 1

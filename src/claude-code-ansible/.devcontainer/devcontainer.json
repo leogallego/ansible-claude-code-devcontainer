@@ -25,7 +25,6 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-python.black-formatter",
-        "eamodio.gitlens",
         "asciidoctor.asciidoctor-vscode"
       ],
       "settings": {
@@ -50,8 +49,6 @@
         "ansible.lightspeed.apiEndpoint": "http://localhost:8788",
         "ansible.lightspeed.modelName": "vertex-claude/claude-sonnet-4",
         "ansible.lightspeed.apiKey": "dummy",
-        "gitlens.showWelcomeOnInstall": false,
-        "gitlens.showWhatsNewAfterUpgrades": false,
         "terminal.integrated.defaultProfile.linux": "bash",
         "terminal.integrated.profiles.linux": {
           "bash": {
@@ -100,6 +97,5 @@
   "workspaceFolder": "/workspace",
   "postCreateCommand": "mkdir -p /workspace/.ansible/{collections,roles,galaxy_cache,tmp} /workspace/.cache && (claude mcp add --scope user ansible-know -- uvx ansible-know-mcp || true) && (claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server --stdio || true) && (claude plugin marketplace add leogallego/claude-ansible-skills || true) && (claude plugin install ansible-docs@claude-ansible-skills --scope user || true) && (claude plugin install ansible-good-practices@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-collection@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-ee@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-role@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-molecule@claude-ansible-skills --scope user || true) && (claude plugin install ansible-zen@claude-ansible-skills --scope user || true) ",
   "postStartCommand": "/usr/local/bin/init-registry-auth.sh; /usr/local/bin/init-abbenay.sh || true",
-  "postAttachCommand": "(VSCODE_CODE=$(ls -t /root/.vscode-server/bin/*/bin/remote-cli/code 2>/dev/null | head -1) && [ -n \"$VSCODE_CODE\" ] && [ -f /opt/abbenay-provider.vsix ] && \"$VSCODE_CODE\" --install-extension /opt/abbenay-provider.vsix --force || true)",
   "waitFor": "postStartCommand"
 }

@@ -100,5 +100,6 @@
   "workspaceFolder": "/workspace",
   "postCreateCommand": "mkdir -p /workspace/.ansible/{collections,roles,galaxy_cache,tmp} /workspace/.cache && (claude mcp add --scope user ansible-know -- uvx ansible-know-mcp || true) && (claude mcp add --scope user ansible -- npx -y @ansible/ansible-mcp-server --stdio || true) && (claude plugin marketplace add leogallego/claude-ansible-skills || true) && (claude plugin install ansible-docs@claude-ansible-skills --scope user || true) && (claude plugin install ansible-good-practices@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-collection@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-ee@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-role@claude-ansible-skills --scope user || true) && (claude plugin install ansible-new-molecule@claude-ansible-skills --scope user || true) && (claude plugin install ansible-zen@claude-ansible-skills --scope user || true) ",
   "postStartCommand": "/usr/local/bin/init-registry-auth.sh; /usr/local/bin/init-abbenay.sh || true",
+  "postAttachCommand": "([ -f /opt/abbenay-provider.vsix ] && code --install-extension /opt/abbenay-provider.vsix --force 2>/dev/null || true)",
   "waitFor": "postStartCommand"
 }

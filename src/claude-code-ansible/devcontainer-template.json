@@ -1,6 +1,6 @@
 {
   "id": "claude-code-ansible",
-  "version": "1.4.10",
+  "version": "1.4.11",
   "name": "Ansible Development Tools (AI-enhanced ansible-dev-tools)",
   "description": "AI-enhanced ansible-dev-tools with Ansible MCP servers, skills pre-configured, Claude Code, and Abbenay AI gateway",
   "documentationURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/tree/main/src/claude-code-ansible",

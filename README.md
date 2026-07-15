@@ -77,6 +77,7 @@ The container uses named container volumes (Docker or Podman) to persist data ac
 - **Bash history** — command history survives container recreation
 - **Claude config** (`~/.claude`) — Claude Code settings, MCP config, and session data
 - **VS Code extensions** — avoids reinstalling extensions on rebuild
+- **gh CLI config** (`~/.config/gh`) — GitHub CLI authentication and settings
 
 ### VS Code Extensions
 
@@ -86,7 +87,7 @@ Claude Code, Ansible, YAML, Python, Pylance, Black, AsciiDoc
 
 - **Docker** or **Podman** running on your host
 - **VS Code** with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-- A Claude Code account (Anthropic API key, Vertex AI credentials, or `claude login`). Not required when using Vertex AI.
+- A Claude Code account (Anthropic API key, Vertex AI credentials, or `claude login`)
 
 ## Quick Start
 
@@ -118,7 +119,7 @@ Then in VS Code: `Ctrl+Shift+P` / `Cmd+Shift+P` -> **Dev Containers: Reopen in C
 The first build pulls the base image and installs dependencies (~3-5 minutes). On startup the container automatically:
 
 - Installs the Claude Code CLI
-- Registers the ansible-know and ansible-mcp-server MCP servers
+- Registers the ansible-know and ansible-devtools-mcp MCP servers
 - Installs the ansible-skills plugin with all 7 skills
 - Extracts and starts the Abbenay daemon on port 8788
 - Runs container registry authentication (if credentials are provided)

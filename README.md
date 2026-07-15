@@ -19,9 +19,9 @@ Plus podman for execution environment support.
 
 Claude Code CLI with Ansible-specific integrations configured at container startup:
 
-- **[ansible-know](https://github.com/leogallego/ansible-know-mcp)** MCP server — module/role documentation lookup, Galaxy search, skill generation
+- **[ansible-know-mcp](https://github.com/leogallego/ansible-know-mcp)** — module/role documentation lookup, Galaxy search, skill generation
 - **[ansible-devtools-mcp](https://github.com/ansible/vscode-ansible)** — ansible-lint, ansible-navigator, project scaffolding, best practices
-- **[ansible-skills plugin](https://github.com/leogallego/claude-ansible-skills)** — 7 skills for scaffolding roles/collections/EEs/molecule scenarios, reviewing code against CoP good practices, querying Ansible docs, and applying the Zen of Ansible
+- **[ansible-skills plugin](https://github.com/leogallego/claude-ansible-skills)** — skills for scaffolding roles/collections/EEs/molecule scenarios, reviewing code against CoP good practices, querying Ansible docs, and applying the Zen of Ansible
 
 All integrations are configured automatically via `postCreateCommand` — no manual MCP setup required.
 
@@ -119,8 +119,8 @@ Then in VS Code: `Ctrl+Shift+P` / `Cmd+Shift+P` -> **Dev Containers: Reopen in C
 The first build pulls the base image and installs dependencies (~3-5 minutes). On startup the container automatically:
 
 - Installs the Claude Code CLI
-- Registers the ansible-know and ansible-devtools-mcp MCP servers
-- Installs the ansible-skills plugin with all 7 skills
+- Registers the ansible-know-mcp and ansible-devtools-mcp MCP servers
+- Installs the ansible-skills plugin with all available skills
 - Extracts and starts the Abbenay daemon on port 8788
 - Runs container registry authentication (if credentials are provided)
 

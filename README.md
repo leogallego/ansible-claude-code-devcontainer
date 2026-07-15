@@ -19,8 +19,8 @@ Plus podman for execution environment support.
 
 Claude Code CLI with Ansible-specific integrations configured at container startup:
 
-- **[ansible-know](https://github.com/ansible-community/ansible-know-mcp)** MCP server — module/role documentation lookup, Galaxy search, skill generation
-- **[ansible-mcp-server](https://github.com/ansible/ansible-mcp-server)** — ansible-lint, ansible-navigator, project scaffolding, best practices
+- **[ansible-know](https://github.com/leogallego/ansible-know-mcp)** MCP server — module/role documentation lookup, Galaxy search, skill generation
+- **[ansible-devtools-mcp](https://github.com/ansible/vscode-ansible)** — ansible-lint, ansible-navigator, project scaffolding, best practices
 - **[ansible-skills plugin](https://github.com/leogallego/claude-ansible-skills)** — 7 skills for scaffolding roles/collections/EEs/molecule scenarios, reviewing code against CoP good practices, querying Ansible docs, and applying the Zen of Ansible
 
 All integrations are configured automatically via `postCreateCommand` — no manual MCP setup required.

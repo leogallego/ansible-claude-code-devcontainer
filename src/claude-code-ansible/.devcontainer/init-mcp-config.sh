@@ -28,7 +28,7 @@ merge_mcp_config() {
   mkdir -p "$target_dir"
 
   if [ ! -f "$target" ]; then
-    echo "$transformed" > "$target"
+    printf '%s\n' "$transformed" > "$target"
     echo "init-mcp-config: created $target_name"
     return 0
   fi
@@ -36,7 +36,7 @@ merge_mcp_config() {
   # Additive merge: existing config is base, transformed source overlays
   local merged
   merged=$(jq -s '.[0] * .[1]' "$target" <(echo "$transformed"))
-  echo "$merged" > "$target"
+  printf '%s\n' "$merged" > "$target"
   echo "init-mcp-config: updated $target_name (merged)"
 }
 

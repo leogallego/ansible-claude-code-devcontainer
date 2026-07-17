@@ -25,7 +25,7 @@ Cursor — see [Multi-Harness AI Support](#multi-harness-ai-support) below.
 - **[ansible-devtools-mcp](https://github.com/ansible/vscode-ansible)** — ansible-lint, ansible-navigator, project scaffolding, best practices
 - **[ansible-skills plugin](https://github.com/leogallego/claude-ansible-skills)** — skills for scaffolding roles/collections/EEs/molecule scenarios, reviewing code against CoP good practices, querying Ansible docs, and applying the Zen of Ansible
 
-All integrations are configured automatically via `postCreateCommand` — no manual MCP setup required.
+All integrations are configured automatically at container startup — no manual MCP setup required.
 
 ### Multi-Harness AI Support
 
@@ -171,10 +171,9 @@ Then in VS Code: `Ctrl+Shift+P` / `Cmd+Shift+P` -> **Dev Containers: Reopen in C
 The first build pulls the base image and installs dependencies (~3-5 minutes). On startup the container automatically:
 
 - Installs the Claude Code CLI
-- Registers the ansible-know-mcp and ansible-devtools-mcp MCP servers
 - Installs the ansible-skills plugin with all available skills
 - Generates `AGENTS.md` and `CLAUDE.md` instruction files
-- Creates MCP config files for Copilot, Gemini CLI, and Cursor
+- Creates MCP config files for Claude Code, Copilot, Gemini CLI, and Cursor
 - Extracts and starts the Abbenay daemon on port 8788
 - Runs container registry authentication (if credentials are provided)
 

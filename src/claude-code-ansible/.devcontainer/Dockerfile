@@ -22,7 +22,7 @@ RUN if [ "$ABBENAY_VERSION" != "none" ]; then \
 RUN mkdir -p /root/.config/abbenay
 COPY abbenay-config.yaml /root/.config/abbenay/config.yaml
 
-ARG DEVCONTAINER_VERSION=1.4.13
+ARG DEVCONTAINER_VERSION=1.5.0
 RUN echo "$DEVCONTAINER_VERSION" > /etc/devcontainer-version
 ENV DEVCONTAINER_TEMPLATE_VERSION=$DEVCONTAINER_VERSION
 ENV DEVCONTAINER=true
@@ -32,7 +32,8 @@ ENV DEVCONTAINER=true
 RUN rm -rf /root/.ansible && ln -s /workspace/.ansible /root/.ansible
 
 # Copy and set up startup scripts
-COPY init-registry-auth.sh init-abbenay.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/init-registry-auth.sh /usr/local/bin/init-abbenay.sh
+COPY init-registry-auth.sh init-abbenay.sh init-claude-md.sh init-mcp-config.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/init-registry-auth.sh /usr/local/bin/init-abbenay.sh \
+    /usr/local/bin/init-claude-md.sh /usr/local/bin/init-mcp-config.sh
 
 WORKDIR /workspace

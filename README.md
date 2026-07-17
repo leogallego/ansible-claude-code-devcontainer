@@ -17,13 +17,65 @@ Plus podman for execution environment support.
 
 ### AI Tooling
 
-Claude Code CLI with Ansible-specific integrations configured at container startup:
+Claude Code CLI with Ansible-specific integrations configured at container
+startup. MCP servers are also auto-configured for Copilot, Gemini CLI, and
+Cursor — see [Multi-Harness AI Support](#multi-harness-ai-support) below.
 
 - **[ansible-know-mcp](https://github.com/leogallego/ansible-know-mcp)** — module/role documentation lookup, Galaxy search, skill generation
 - **[ansible-devtools-mcp](https://github.com/ansible/vscode-ansible)** — ansible-lint, ansible-navigator, project scaffolding, best practices
 - **[ansible-skills plugin](https://github.com/leogallego/claude-ansible-skills)** — skills for scaffolding roles/collections/EEs/molecule scenarios, reviewing code against CoP good practices, querying Ansible docs, and applying the Zen of Ansible
 
-All integrations are configured automatically via `postCreateCommand` — no manual MCP setup required.
+All integrations are configured automatically at container startup — no manual MCP setup required.
+
+### Multi-Harness AI Support
+
+The container generates instruction files and MCP config files at startup
+for multiple AI coding assistants:
+
+| Harness | Instructions | MCP Config | Setup |
+|---|---|---|---|
+| Claude Code | `CLAUDE.md` (imports `AGENTS.md`) | `.mcp.json` | Automatic |
+| GitHub Copilot (VS Code) | `AGENTS.md` | `.vscode/mcp.json` | Automatic |
+| GitHub Copilot (CLI) | `AGENTS.md` | `.mcp.json` | Automatic |
+| Gemini CLI | `AGENTS.md` | `.gemini/settings.json` | Automatic |
+| Cursor | `AGENTS.md` | `.cursor/mcp.json` | Automatic |
+| OpenAI Codex CLI | `AGENTS.md` | `~/.codex/config.toml` | Manual MCP setup |
+| JetBrains Junie | `AGENTS.md` | IDE Settings | Manual MCP setup |
+| Windsurf/Devin | `AGENTS.md` | User config | Manual MCP setup |
+
+**`AGENTS.md`** contains universal Ansible development rules (coding
+standards, toolchain info, MCP server descriptions, key paths) readable by
+any AI coding assistant.
+
+**`CLAUDE.md`** adds Claude Code-specific context: MCP tool prefixes,
+installed skills, and `/slash` command workflows.
+
+**MCP config files** register the ansible-know and ansible-devtools MCP
+servers in each harness's native format.
+
+All generated files use marker comments or jq merge to preserve existing
+user content — they are never overwritten. Generated files can be committed
+to git (team shares the config) or added to `.gitignore`.
+
+#### Manual MCP setup for Codex CLI
+
+Add to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.ansible-know]
+command = "uvx"
+args = ["ansible-know-mcp"]
+
+[mcp_servers.ansible]
+command = "npx"
+args = ["-y", "@ansible/ansible-mcp-server", "--stdio"]
+```
+
+#### Manual MCP setup for JetBrains Junie
+
+In your JetBrains IDE: **Settings > Tools > AI Assistant > Model Context
+Protocol (MCP)** — add each server with the same command and args shown
+above.
 
 ### Abbenay AI Gateway
 
@@ -119,8 +171,9 @@ Then in VS Code: `Ctrl+Shift+P` / `Cmd+Shift+P` -> **Dev Containers: Reopen in C
 The first build pulls the base image and installs dependencies (~3-5 minutes). On startup the container automatically:
 
 - Installs the Claude Code CLI
-- Registers the ansible-know-mcp and ansible-devtools-mcp MCP servers
 - Installs the ansible-skills plugin with all available skills
+- Generates `AGENTS.md` and `CLAUDE.md` instruction files
+- Creates MCP config files for Claude Code, Copilot, Gemini CLI, and Cursor
 - Extracts and starts the Abbenay daemon on port 8788
 - Runs container registry authentication (if credentials are provided)
 

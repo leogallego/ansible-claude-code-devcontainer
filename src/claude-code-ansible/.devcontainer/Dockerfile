@@ -1,4 +1,4 @@
-FROM ghcr.io/ansible/community-ansible-dev-tools:v26.6.1
+FROM ghcr.io/ansible/community-ansible-dev-tools:v26.7.2
 
 ENV TZ="UTC"
 

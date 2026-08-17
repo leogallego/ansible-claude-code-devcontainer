@@ -23,7 +23,7 @@ RUN if [ "$ABBENAY_VERSION" != "none" ]; then \
 RUN mkdir -p /root/.config/abbenay
 COPY abbenay-config.yaml /root/.config/abbenay/config.yaml
 
-ARG DEVCONTAINER_VERSION=1.5.0
+ARG DEVCONTAINER_VERSION=1.6.0
 RUN echo "$DEVCONTAINER_VERSION" > /etc/devcontainer-version
 ENV DEVCONTAINER_TEMPLATE_VERSION=$DEVCONTAINER_VERSION
 ENV DEVCONTAINER=true

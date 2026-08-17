@@ -51,7 +51,7 @@
         "ansible.lightspeed.enabled": true,
         "ansible.lightspeed.provider": "rhcustom",
         "ansible.lightspeed.apiEndpoint": "http://localhost:8788",
-        "ansible.lightspeed.modelName": "vertex-claude/claude-sonnet-4",
+        "ansible.lightspeed.modelName": "vertex-claude/claude-opus-4-6",
         "ansible.lightspeed.apiKey": "devcontainer-local-token",
         "terminal.integrated.defaultProfile.linux": "bash",
         "terminal.integrated.profiles.linux": {

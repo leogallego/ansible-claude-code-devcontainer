@@ -9,8 +9,12 @@ providers:
   vertex-claude:
     engine: vertex-anthropic
     models:
-      claude-sonnet-4:
-        model_id: "claude-sonnet-4@20250514"
+      claude-opus-4-6:
+        model_id: "claude-opus-4-6"
+      claude-sonnet-4-6:
+        model_id: "claude-sonnet-4-6"
+      claude-haiku-4-5:
+        model_id: "claude-haiku-4-5"
 
   # Anthropic direct API (uses ANTHROPIC_API_KEY)
   # anthropic:
@@ -20,23 +24,22 @@ providers:
   #     claude-sonnet-4-20250514: {}
 
   # OpenRouter — single key for 200+ models from multiple providers
-  # openrouter:
-  #   engine: openrouter
-  #   api_key_env_var_name: "OPENROUTER_API_KEY"
-  #   models:
-  #     google/gemini-2.5-pro-preview: {}
-  #     anthropic/claude-sonnet-4: {}
+  openrouter:
+    engine: openrouter
+    api_key_env_var_name: "OPENROUTER_API_KEY"
+    models:
+      google/gemini-2.5-flash:free: {}
 
   # Google Gemini — direct access
-  # gemini:
-  #   engine: google
-  #   api_key_env_var_name: "GOOGLE_GENERATIVE_AI_API_KEY"
-  #   models:
-  #     gemini-2.5-pro: {}
+  gemini:
+    engine: google
+    api_key_env_var_name: "GOOGLE_GENERATIVE_AI_API_KEY"
+    models:
+      gemini-2.5-pro: {}
 
   # Local Ollama (no API key required)
-  # ollama:
-  #   engine: ollama
-  #   base_url: "http://host.containers.internal:11434"
-  #   models:
-  #     llama3.2: {}
+  ollama:
+    engine: ollama
+    base_url: "http://host.containers.internal:11434"
+    models:
+      qwen3:14b: {}

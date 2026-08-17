@@ -79,9 +79,18 @@ above.
 
 ### Abbenay AI Gateway
 
-[Abbenay](https://github.com/redhat-developer/abbenay) is bundled as an OpenAI-compatible API gateway that abstracts 19+ LLM providers behind a single endpoint. The daemon starts automatically on port 8788 and can be used by Ansible Lightspeed or any tool that speaks the OpenAI API.
+[Abbenay](https://github.com/redhat-developer/abbenay) is bundled as an OpenAI-compatible API gateway that abstracts 19+ LLM providers behind a single endpoint. The daemon starts automatically on port 8788 and serves as the backend for Ansible Lightspeed and any tool that speaks the OpenAI API.
 
-Set `ABBENAY_VERSION=none` as a build arg to opt out.
+A fixed bearer token (`devcontainer-local-token`) is pre-configured for authentication between Lightspeed and the Abbenay daemon. This is safe because the daemon only listens on `127.0.0.1` inside the container.
+
+#### Version overrides
+
+The base image and Abbenay versions can be overridden via build args in `devcontainer.json` or at build time:
+
+| Build arg | Default | Description |
+|-----------|---------|-------------|
+| `ADT_VERSION` | `v26.8.0` | community-ansible-dev-tools base image tag |
+| `ABBENAY_VERSION` | `v2026.8.6` | Abbenay VSIX version (`none` to skip) |
 
 ### AI Provider Support
 
@@ -105,7 +114,17 @@ The template supports multiple AI backends for Claude Code and Abbenay. All vari
 | `OPENROUTER_API_KEY` | OpenRouter API key (access to 100+ models) |
 | `GOOGLE_GENERATIVE_AI_API_KEY` | Google Generative AI API key (for Gemini via AI Studio) |
 
-The container mounts `~/.config/gcloud` read-only for credential access. Vertex AI users do not need an Anthropic account or API key.
+The container mounts `~/.config/gcloud` read-only for credential access and sets `GOOGLE_APPLICATION_CREDENTIALS` to the ADC file path automatically. Vertex AI users do not need an Anthropic account or API key.
+
+### Ansible Lightspeed
+
+Ansible Lightspeed is pre-configured to use Abbenay as its LLM backend via the Red Hat AI provider. On first container start, the Ansible extension auto-configures itself with the endpoint (`http://localhost:8788`), model (`vertex-claude/claude-sonnet-4`), and auth token.
+
+If auto-configuration doesn't activate, open the Ansible extension sidebar, go to **LLM Provider Settings**, click **Edit** on **Red Hat AI**, and set:
+
+- **API Endpoint:** `http://localhost:8788`
+- **Model Name:** `vertex-claude/claude-sonnet-4`
+- **API Key:** `devcontainer-local-token`
 
 ### Environment Variables
 

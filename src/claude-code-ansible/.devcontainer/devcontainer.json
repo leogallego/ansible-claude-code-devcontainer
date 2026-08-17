@@ -1,7 +1,11 @@
 {
   "name": "Ansible Development Tools (AI-enhanced ansible-dev-tools)",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "args": {
+      "ADT_VERSION": "v26.8.0",
+      "ABBENAY_VERSION": "v2026.8.6"
+    }
   },
   "runArgs": [
     "--cap-add=CAP_MKNOD",
@@ -48,7 +52,7 @@
         "ansible.lightspeed.provider": "rhcustom",
         "ansible.lightspeed.apiEndpoint": "http://localhost:8788",
         "ansible.lightspeed.modelName": "vertex-claude/claude-sonnet-4",
-        "ansible.lightspeed.apiKey": "dummy",
+        "ansible.lightspeed.apiKey": "devcontainer-local-token",
         "terminal.integrated.defaultProfile.linux": "bash",
         "terminal.integrated.profiles.linux": {
           "bash": {
@@ -91,7 +95,9 @@
     "GOOGLE_GENERATIVE_AI_API_KEY": "${localEnv:GOOGLE_GENERATIVE_AI_API_KEY}",
     "ANSIBLE_COLLECTIONS_PATH": "/workspace/collections:/root/.ansible/collections:/usr/share/ansible/collections",
     "ANSIBLE_ROLES_PATH": "/workspace/roles:/root/.ansible/roles:/usr/share/ansible/roles",
-    "XDG_CACHE_HOME": "/workspace/.cache"
+    "XDG_CACHE_HOME": "/workspace/.cache",
+    "ABBENAY_API_TOKEN": "devcontainer-local-token",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/root/.config/gcloud/application_default_credentials.json"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",

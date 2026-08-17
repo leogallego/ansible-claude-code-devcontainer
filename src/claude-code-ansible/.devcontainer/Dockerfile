@@ -1,4 +1,5 @@
-FROM ghcr.io/ansible/community-ansible-dev-tools:v26.6.1
+ARG ADT_VERSION=v26.8.0
+FROM ghcr.io/ansible/community-ansible-dev-tools:${ADT_VERSION}
 
 ENV TZ="UTC"
 
@@ -10,7 +11,7 @@ RUN npm install -g @anthropic-ai/claude-code
 
 # Download Abbenay AI provider gateway (VS Code extension + bundled daemon)
 # Set to "none" to skip. See: https://github.com/redhat-developer/abbenay
-ARG ABBENAY_VERSION=v2026.6.4
+ARG ABBENAY_VERSION=v2026.8.6
 RUN if [ "$ABBENAY_VERSION" != "none" ]; then \
       arch=$(uname -m | sed 's/x86_64/x64/' | sed 's/aarch64/arm64/') && \
       version_num=$(echo "$ABBENAY_VERSION" | sed 's/^v//') && \

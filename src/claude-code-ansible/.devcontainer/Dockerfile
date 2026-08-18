@@ -33,6 +33,10 @@ ENV DEVCONTAINER=true
 RUN rm -rf /root/.ansible && ln -s /workspace/.ansible /root/.ansible
 
 # Copy and set up startup scripts
+# Galaxy server config for ansible-know MCP (Automation Hub + public Galaxy)
+# Tokens are injected via ANSIBLE_GALAXY_SERVER_{NAME}_TOKEN env vars
+COPY ansible.cfg /etc/ansible/ansible.cfg
+
 COPY init-registry-auth.sh init-abbenay.sh init-claude-md.sh init-mcp-config.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/init-registry-auth.sh /usr/local/bin/init-abbenay.sh \
     /usr/local/bin/init-claude-md.sh /usr/local/bin/init-mcp-config.sh

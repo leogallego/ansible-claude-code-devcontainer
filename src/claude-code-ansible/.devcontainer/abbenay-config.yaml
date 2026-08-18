@@ -28,7 +28,7 @@ providers:
     engine: openrouter
     api_key_env_var_name: "OPENROUTER_API_KEY"
     models:
-      google/gemini-2.5-flash:free: {}
+      google/gemini-3.7-flash: {}
 
   # Google Gemini — direct access
   gemini:

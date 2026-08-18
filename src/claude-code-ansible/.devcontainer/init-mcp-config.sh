@@ -35,20 +35,18 @@ merge_mcp_config() {
 
   # Additive merge: existing config is base, transformed source overlays
   local merged
-  merged=$(jq -s '.[0] * .[1]' "$target" <(echo "$transformed"))
+  merged=$(jq -s '.[0] + .[1]' "$target" <(echo "$transformed"))
   printf '%s\n' "$merged" > "$target"
   echo "init-mcp-config: updated $target_name (merged)"
 }
 
-# .mcp.json — Claude Code + Copilot CLI
-# Add type:"local" and tools:["*"] per server for Copilot CLI compatibility
-merge_mcp_config "$WORKSPACE/.mcp.json" \
-  '{mcpServers: (.mcpServers | to_entries | map(.value += {type: "local", tools: ["*"]}) | from_entries)}'
+# .mcp.json — Claude Code, Copilot CLI
+merge_mcp_config "$WORKSPACE/.mcp.json" '{mcpServers: .mcpServers}'
 
 # .vscode/mcp.json — Copilot (VS Code)
-# Rename mcpServers to servers
+# Exclude "ansible" — redhat.ansible extension auto-registers it
 merge_mcp_config "$WORKSPACE/.vscode/mcp.json" \
-  '{servers: .mcpServers}'
+  '{servers: (.mcpServers | del(.ansible))}'
 
 # .gemini/settings.json — Gemini CLI + Gemini Code Assist
 # Keep mcpServers key, add context.fileName for AGENTS.md discovery
